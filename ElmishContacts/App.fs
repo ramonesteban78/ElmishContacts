@@ -91,7 +91,7 @@ module App =
                 View.ContentPage(
                     title="Elmish Contacts",
                     toolbarItems=[
-                        mkToolbarButton "Add" (fun() -> AddNewContact |> dispatch)
+                        mkToolbarButton "AddButton" "Add" (fun() -> AddNewContact |> dispatch)
                     ],
                     content=View.StackLayout(
                         children=
@@ -127,15 +127,15 @@ module App =
                 View.ContentPage(
                     title=(if mName = "" then "New Contact" else mName),
                     toolbarItems=[
-                        mkToolbarButton "Save" (fun() -> (mSelectedContact.Value, mName, mIsFavorite) |> SaveContact |> dispatch)
+                        mkToolbarButton "ButtonSave" "Save" (fun() -> (mSelectedContact.Value, mName, mIsFavorite) |> SaveContact |> dispatch)
                     ],
                     content=View.StackLayout(
                         children=[
                             mkFormLabel "Name"
-                            mkFormEntry mName (fun e -> e.NewTextValue |> UpdateName |> dispatch)
+                            mkFormEntry "NameEntry" mName (fun e -> e.NewTextValue |> UpdateName |> dispatch)
                             mkFormLabel "Is Favorite"
-                            mkFormSwitch mIsFavorite (fun e -> e.Value |> UpdateIsFavorite |> dispatch)
-                            mkDestroyButton "Delete" (fun () -> mSelectedContact.Value |> DeleteContact |> dispatch) isDeleteButtonVisible
+                            mkFormSwitch "FavoriteSwitch" mIsFavorite (fun e -> e.Value |> UpdateIsFavorite |> dispatch)
+                            mkDestroyButton "DeleteButton" "Delete" (fun () -> mSelectedContact.Value |> DeleteContact |> dispatch) isDeleteButtonVisible
                         ]
                     )
                 )
